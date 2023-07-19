@@ -1,15 +1,26 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 // This will provide our global data
 const CountContext = createContext();
 
-// This provider will say who gets the data...
+// THis provider will say who gets the data...
 function CountProvider({ children }){
+
+    const [count, setCount] = useState(0);
+
+    function increment(){
+        setCount(count + 1);
+    }
+
+    function decrement(){
+        setCount(count - 1);
+    }
+
     return(
-        <CountContext.Provider value={999} >
+        <CountContext.Provider value={ {count, increment, decrement } } >
             { children }
         </CountContext.Provider>
     );
 }
 
-export { CountContext, CountProvider }
+export { CountContext, CountProvider };
